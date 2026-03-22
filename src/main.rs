@@ -12,7 +12,6 @@ use nx::gpu;
 use nx::input;
 use nx::result::*;
 use nx::service::hid;
-use nx::service::hid::shmem::KeyboardState;
 use nx::svc;
 use nx::sync::RwLock;
 use nx::thread;
@@ -20,8 +19,9 @@ use nx::util;
 
 use core::fmt::Write;
 use core::panic;
+use core::time::Duration;
 
-nx::rrt0_define_module_name!("console-interactive");
+// nx::rrt0_define_module_name!("console-interactive");
 
 #[panic_handler]
 fn panic_handler(info: &panic::PanicInfo) -> ! {
@@ -44,7 +44,7 @@ pub fn initialize_heap(hbl_heap: util::PointerAndSize) -> util::PointerAndSize {
 fn main() {
     let mut console: nx::console::vty::TextBufferConsole = {
         let gpu_ctx = gpu::Context::new(
-            gpu::NvDrvServiceKind::Applet,
+            gpu::NvDrvServiceKind::Application,
             gpu::ViServiceKind::System,
             0x40000,
         )
@@ -66,44 +66,8 @@ fn main() {
         embedded_term::Console::on_text_buffer(text_buffer)
     };
 
-    let supported_style_tags = hid::NpadStyleTag::Handheld()
-        | hid::NpadStyleTag::FullKey()
-        | hid::NpadStyleTag::JoyDual()
-        | hid::NpadStyleTag::JoyLeft()
-        | hid::NpadStyleTag::JoyRight();
-    let input_ctx =
-        input::Context::new(supported_style_tags, 2).expect("Failed to create inpput context");
-
-    let mut old_keyboard_state: KeyboardState = Default::default();
-    'render: loop {
-        for controller in [hid::NpadIdType::Handheld, hid::NpadIdType::No1].iter() {
-            let mut player = input_ctx.get_player(*controller);
-
-            let buttons_down = player.get_buttons_down();
-            if buttons_down.contains(hid::NpadButton::Down()) {
-                let _ = console.write_str("\x1B[1B");
-            } else if buttons_down.contains(hid::NpadButton::Up()) {
-                let _ = console.write_str("\x1B[1A");
-            } else if buttons_down.contains(hid::NpadButton::Plus()) {
-                // Exit if Plus/+ is pressed.
-                break 'render;
-            }
-        }
-
-        let keyboard_state = input_ctx
-            .get_player(hid::NpadIdType::Handheld)
-            .get_keyboard_state();
-
-        for key_down in keyboard_state.keys {
-            if old_keyboard_state.keys.is_up(key_down)
-                && let Some(ansi_str) = key_down.get_ansi()
-            {
-                let _ = console.write_str(ansi_str);
-            }
-        }
-
-        old_keyboard_state = keyboard_state;
-
-        let _ = thread::sleep(100_000);
+    for _ in 0..10 {
+        let _ = console.write_str("fuckkkkkkkkkkk");
+        let _ = thread::sleep(Duration::from_secs(1).as_nanos() as i64);
     }
 }

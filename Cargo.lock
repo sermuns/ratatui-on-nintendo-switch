@@ -61,14 +61,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1fd0f2584146f6f2ef48085050886acf353beff7305ebd1ae69500e27c67f64b"
 
 [[package]]
-name = "console-interactive"
-version = "0.1.0"
-dependencies = [
- "embedded-term",
- "nx",
-]
-
-[[package]]
 name = "embedded-graphics"
 version = "0.7.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -311,6 +303,14 @@ name = "rand_core"
 version = "0.9.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "76afc826de14238e6e8c374ddcc1fa19e374fd8dd986b0d2af0d02377261d83c"
+
+[[package]]
+name = "ratatui-on-nx"
+version = "0.1.0"
+dependencies = [
+ "embedded-term",
+ "nx",
+]
 
 [[package]]
 name = "scopeguard"

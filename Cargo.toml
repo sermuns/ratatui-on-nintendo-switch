@@ -1,7 +1,6 @@
 [package]
-name = "console-interactive"
+name = "ratatui-on-nx"
 version = "0.1.0"
-authors = ["XorTroll"]
 edition = "2024"
 
 [dependencies.nx]
@@ -14,7 +13,7 @@ features = [
 ]
 
 [package.metadata.nx.nro]
-nacp = { default_name = "console-interactive", default_author = "XorTroll", version = "Example" }
+nacp = { default_name = "ratatui-on-nx", default_author = "sermuns", version = "0.1.0" }
 
 [dependencies]
 embedded-term = {version = "0.1.1", default-features = false}
