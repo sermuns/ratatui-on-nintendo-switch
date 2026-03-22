@@ -93,7 +93,7 @@ fn main() {
 
         for player in &mut players {
             let buttons_down = player.get_buttons_down();
-            if buttons_down.contains(hid::NpadButton::Plus()) {
+            if buttons_down.intersects(hid::NpadButton::Plus() | hid::NpadButton::B()) {
                 break 'main;
             }
         }
@@ -113,21 +113,48 @@ impl App {
     }
 
     fn render(&self, frame: &mut Frame) {
-        match self.psm_service.get_battery_charge_percentage() {
-            Ok(percentage) => {
-                let big_text = BigText::builder()
-                    .centered()
-                    .pixel_size(PixelSize::Full)
-                    .style(Style::new().blue())
-                    .lines(vec![format!("{percentage}%").yellow().into()])
-                    .build();
-                frame.render_widget(big_text, frame.area());
-            }
+        // TODO: do less alloc...
+        let percentage = match self.psm_service.get_battery_charge_percentage() {
             Err(e) => {
                 let paragraph = Paragraph::new(format!("error: {e:?}"))
                     .block(Block::bordered().title(env!("CARGO_PKG_NAME")));
                 frame.render_widget(paragraph, frame.area());
+                return;
             }
-        }
+            Ok(percentage) => percentage,
+        };
+
+        let layout = Layout::vertical([
+            Constraint::Fill(1),
+            Constraint::Fill(1),
+            Constraint::Length(1),
+        ]);
+        let [text_area, bar_area, footer_area] = frame.area().layout(&layout);
+
+        let big_text = BigText::builder()
+            .centered()
+            .pixel_size(PixelSize::Full)
+            .style(Style::new().blue())
+            .lines(vec![format!("{percentage}%").yellow().into()])
+            .build();
+        frame.render_widget(
+            big_text,
+            text_area.centered_vertically(Constraint::Percentage(50)),
+        );
+
+        // FIXME: possibly shitty way to do progress bars in Ratatui..
+        let [bar_area] = bar_area.layout(&Layout::horizontal([Constraint::Percentage(
+            percentage as u16,
+        )]));
+        let bar_color = match percentage {
+            0..=20 => Color::Red,
+            21..=50 => Color::Yellow,
+            _ => Color::Green,
+        };
+        let bar_block = Block::new().bg(bar_color);
+        frame.render_widget(bar_block, bar_area);
+
+        let paragraph = Paragraph::new("Press + or B to exit");
+        frame.render_widget(paragraph, footer_area);
     }
 }
