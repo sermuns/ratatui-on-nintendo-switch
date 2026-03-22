@@ -1,3 +1,4 @@
+[no-cd]
 upload: build
 	#!/bin/bash
 	set -e
