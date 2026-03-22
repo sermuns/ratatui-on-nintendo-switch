@@ -5,7 +5,7 @@ edition.workspace = true
 [dependencies]
 embedded-graphics-unicodefonts.workspace = true
 mousefood.workspace = true
-nx.workspace = true
+nx = { workspace = true, features = ["vty"] }
 ratatui.workspace = true
 
 [package.metadata.nx.nro]
