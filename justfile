@@ -1,5 +1,5 @@
 [no-cd]
-upload: build
+upload:
 	#!/bin/bash
 	set -e
 
@@ -11,7 +11,5 @@ upload: build
 	TARGET_DIR=$(cargo metadata --format-version=1 --no-deps | jq -r '.target_directory')
 	PKG_NAME=$(basename "$PWD")
 
+	cargo nx build --release --package $PKG_NAME
 	cargo nx link "$TARGET_DIR/aarch64-nintendo-switch-freestanding/release/$PKG_NAME.nro"
-
-build:
-	cargo nx build --release
