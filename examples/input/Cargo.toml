@@ -1,0 +1,12 @@
+[package]
+name = "input"
+edition.workspace = true
+
+[dependencies]
+embedded-graphics-unicodefonts.workspace = true
+mousefood.workspace = true
+nx = { workspace = true, features = ["vty", "input"] }
+ratatui.workspace = true
+
+[package.metadata.nx.nro]
+nacp = { default_name = "input", default_author = "sermuns", version = "0.1.0" }

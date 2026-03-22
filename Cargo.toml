@@ -2,6 +2,7 @@
 resolver = "3"
 members = [
     "examples/hello-world",
+    "examples/input",
 ]
 
 [workspace.package]
