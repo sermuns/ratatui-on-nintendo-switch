@@ -16,6 +16,3 @@ ratatui = { version = "0.30", default-features = false, features = ["all-widgets
 [workspace.dependencies.nx]
 git = "https://github.com/sermuns/nx"
 branch = "embedded-graphics-0.4.1"
-
-[profile.dev]
-opt-level = 1

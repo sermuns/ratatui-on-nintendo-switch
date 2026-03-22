@@ -12,7 +12,7 @@ You have to have a modded Nintendo Switch, with the ability to run `.nro`:s (hom
 
 Then use [`cargo-nx`](https://github.com/aarch64-switch-rs/cargo-nx) to build and upload the code to your Switch:
 
-1. Build:
+1. Build (you MUST do a `release` build. `debug` is simply too unoptimized):
 
    ```sh
    cargo nx build --release
