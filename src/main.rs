@@ -2,30 +2,25 @@
 #![no_main]
 
 extern crate alloc;
-use alloc::format;
 use alloc::sync::Arc;
-
-use embedded_term::TextOnGraphic;
-use nx::console::vty::PersistentBufferedCanvas;
+use core::panic;
+use core::time::Duration;
+use mousefood::prelude::*;
 use nx::diag::abort;
 use nx::gpu;
-use nx::input;
 use nx::result::*;
-use nx::service::hid;
 use nx::svc;
 use nx::sync::RwLock;
 use nx::thread;
 use nx::util;
+use ratatui::widgets::{Block, Paragraph};
+use ratatui::{Frame, Terminal};
 
-use core::fmt::Write;
-use core::panic;
-use core::time::Duration;
-
-// nx::rrt0_define_module_name!("console-interactive");
+// neccessary?
+nx::rrt0_define_module_name!(env!("CARGO_PKG_NAME"));
 
 #[panic_handler]
-fn panic_handler(info: &panic::PanicInfo) -> ! {
-    let _info_message = format!("{}", info);
+fn panic_handler(_info: &panic::PanicInfo) -> ! {
     nx::diag::abort::abort(abort::AbortLevel::Panic(), nx::rc::ResultPanicked::make());
 }
 
@@ -42,11 +37,11 @@ pub fn initialize_heap(hbl_heap: util::PointerAndSize) -> util::PointerAndSize {
 
 #[unsafe(no_mangle)]
 fn main() {
-    let mut console: nx::console::vty::TextBufferConsole = {
+    let mut canvas = {
         let gpu_ctx = gpu::Context::new(
-            gpu::NvDrvServiceKind::Application,
+            gpu::NvDrvServiceKind::Applet,
             gpu::ViServiceKind::System,
-            0x40000,
+            0x800000,
         )
         .unwrap();
 
@@ -54,20 +49,29 @@ fn main() {
             Arc::new(RwLock::new(gpu_ctx)),
             Default::default(),
             2,
-            gpu::BlockLinearHeights::FourGobs,
+            gpu::BlockLinearHeights::EightGobs,
         )
         .unwrap();
 
-        let width = surface.surface.width();
-        let height = surface.surface.height();
-
-        let text_buffer = TextOnGraphic::new(PersistentBufferedCanvas::new(surface), width, height);
-
-        embedded_term::Console::on_text_buffer(text_buffer)
+        nx::console::vty::PersistentBufferedCanvas::new(surface)
     };
 
-    for _ in 0..10 {
-        let _ = console.write_str("fuckkkkkkkkkkk");
-        let _ = thread::sleep(Duration::from_secs(1).as_nanos() as i64);
-    }
+    let backend = EmbeddedBackend::new(
+        &mut canvas,
+        EmbeddedBackendConfig {
+            font_regular: embedded_graphics_unicodefonts::MONO_10X20,
+            ..Default::default()
+        },
+    );
+
+    let mut terminal = Terminal::new(backend).unwrap();
+
+    let _ = terminal.draw(draw);
+    let _ = thread::sleep(Duration::from_secs(2).as_nanos() as i64);
+}
+
+fn draw(frame: &mut Frame) {
+    let block = Block::bordered().title("Mousefood");
+    let paragraph = Paragraph::new("Hello from Mousefood!").block(block);
+    frame.render_widget(paragraph, frame.area());
 }

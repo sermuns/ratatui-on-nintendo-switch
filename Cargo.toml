@@ -3,8 +3,18 @@ name = "ratatui-on-nx"
 version = "0.1.0"
 edition = "2024"
 
+
+[package.metadata.nx.nro]
+nacp = { default_name = "ratatui-on-nx", default_author = "sermuns", version = "0.1.0" }
+
+[dependencies]
+embedded-graphics-unicodefonts = "0.2"
+mousefood = "0.5"
+ratatui = { version = "0.30", default-features = false, features = ["all-widgets"] }
+
 [dependencies.nx]
-git = "https://github.com/aarch64-switch-rs/nx"
+git = "https://github.com/sermuns/nx"
+branch = "embedded-graphics-0.4.1"
 features = [
     "input",
     "fs",
@@ -12,8 +22,5 @@ features = [
     "rand",
 ]
 
-[package.metadata.nx.nro]
-nacp = { default_name = "ratatui-on-nx", default_author = "sermuns", version = "0.1.0" }
-
-[dependencies]
-embedded-term = {version = "0.1.1", default-features = false}
+[profile.dev]
+opt-level = 1
