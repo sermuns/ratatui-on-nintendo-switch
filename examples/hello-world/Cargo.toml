@@ -1,0 +1,12 @@
+[package]
+name = "hello-world"
+edition.workspace = true
+
+[dependencies]
+embedded-graphics-unicodefonts.workspace = true
+mousefood.workspace = true
+nx.workspace = true
+ratatui.workspace = true
+
+[package.metadata.nx.nro]
+nacp = { default_name = "hello-world", default_author = "sermuns", version = "0.1.0" }

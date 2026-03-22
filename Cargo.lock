@@ -309,6 +309,16 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2304e00983f87ffb38b55b444b5e3b60a884b5d30c0fca7d82fe33449bbe55ea"
 
 [[package]]
+name = "hello-world"
+version = "0.0.0"
+dependencies = [
+ "embedded-graphics-unicodefonts",
+ "mousefood",
+ "nx",
+ "ratatui",
+]
+
+[[package]]
 name = "ident_case"
 version = "1.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -594,16 +604,6 @@ dependencies = [
  "unicode-segmentation",
  "unicode-truncate",
  "unicode-width",
-]
-
-[[package]]
-name = "ratatui-on-nx"
-version = "0.1.0"
-dependencies = [
- "embedded-graphics-unicodefonts",
- "mousefood",
- "nx",
- "ratatui",
 ]
 
 [[package]]
