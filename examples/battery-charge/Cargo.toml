@@ -5,9 +5,12 @@ edition.workspace = true
 [dependencies]
 embedded-graphics-unicodefonts.workspace = true
 mousefood.workspace = true
-nx = { workspace = true, features = ["vty", "input"] }
+nx = { workspace = true, features = ["vty", "input", "applet"] }
 ratatui.workspace = true
 tui-big-text = "0.8"
 
-[package.metadata.nx.nro]
-nacp = { default_name = "battery-charge", default_author = "sermuns", version = "0.1.0" }
+[package.metadata.nx.nro.nacp]
+name = "battery-charge"
+author = "sermuns"
+version = "0.1.0"
+screenshot = "Allow"

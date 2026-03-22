@@ -8,8 +8,10 @@ use alloc::{format, vec};
 use core::panic;
 use core::time::Duration;
 use mousefood::prelude::*;
+use nx::applet::{self, ISelfControllerClient, ProxyCommon, ScreenShotPermission, SelfController};
 use nx::diag::abort;
 use nx::ipc::client::IClientObject;
+use nx::service::bsd::AppletBsdService;
 use nx::service::hid;
 use nx::service::psm::{IPsmClient, PsmService};
 use nx::svc;
@@ -45,6 +47,13 @@ pub fn initialize_heap(hbl_heap: util::PointerAndSize) -> util::PointerAndSize {
 
 #[unsafe(no_mangle)]
 fn main() {
+    // // enable screenshotting??
+    // if let Some(applet_proxy) = applet::get_applet_proxy().as_ref()
+    //     && let Ok(self_controller) = applet_proxy.get_self_controller()
+    // {
+    //     let _ = self_controller.set_screenshot_permission(ScreenShotPermission::Enable);
+    // }
+
     let mut canvas = {
         let gpu_ctx = gpu::Context::new(
             gpu::NvDrvServiceKind::Applet,
@@ -57,7 +66,7 @@ fn main() {
             Arc::new(RwLock::new(gpu_ctx)),
             Default::default(),
             2,
-            gpu::BlockLinearHeights::EightGobs,
+            gpu::BlockLinearHeights::TwoGobs,
         )
         .unwrap();
 
