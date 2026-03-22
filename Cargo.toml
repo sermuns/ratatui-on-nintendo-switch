@@ -3,6 +3,7 @@ resolver = "3"
 members = [
     "examples/hello-world",
     "examples/input",
+    "examples/battery-charge",
 ]
 
 [workspace.package]
