@@ -67,7 +67,7 @@ fn main() {
     let mut terminal = Terminal::new(backend).unwrap();
 
     let _ = terminal.draw(draw);
-    let _ = thread::sleep(Duration::from_secs(2).as_nanos() as i64);
+    let _ = thread::sleep(Duration::from_secs(10).as_nanos() as i64);
 }
 
 fn draw(frame: &mut Frame) {
