@@ -19,8 +19,8 @@ use nx::{
     thread::sleep,
     util,
 };
-use ratatui::prelude::*;
 use ratatui::widgets::{Block, Paragraph};
+use ratatui::{prelude::*, widgets::Gauge};
 use tui_big_text::{BigText, PixelSize};
 
 // neccessary?
@@ -135,7 +135,7 @@ impl App {
             Constraint::Fill(1),
             Constraint::Length(1),
         ]);
-        let [text_area, bar_area, footer_area] = frame.area().layout(&layout);
+        let [text_area, gauge_area, footer_area] = frame.area().layout(&layout);
 
         let big_text = BigText::builder()
             .centered()
@@ -148,17 +148,17 @@ impl App {
             text_area.centered_vertically(Constraint::Percentage(50)),
         );
 
-        // FIXME: possibly shitty way to do progress bars in Ratatui..
-        let [bar_area] = bar_area.layout(&Layout::horizontal([Constraint::Percentage(
-            percentage as u16,
-        )]));
-        let bar_color = match percentage {
-            0..=20 => Color::Red,
-            21..=50 => Color::Yellow,
-            _ => Color::Green,
+        let gauge_style = match percentage {
+            0..=20 => Style::new().green().on_black(),
+            21..=50 => Style::new().yellow().on_black(),
+            _ => Style::new().white().green().on_black(),
         };
-        let bar_block = Block::new().bg(bar_color);
-        frame.render_widget(bar_block, bar_area);
+        let gauge = Gauge::default()
+            .gauge_style(gauge_style)
+            .percent(percentage as u16)
+            .block(Block::new().title("Battery charge"));
+
+        frame.render_widget(gauge, gauge_area);
 
         let paragraph = Paragraph::new("Press + or B to exit");
         frame.render_widget(paragraph, footer_area);
