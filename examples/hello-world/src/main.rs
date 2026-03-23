@@ -3,18 +3,14 @@
 
 extern crate alloc;
 use alloc::sync::Arc;
-use core::panic;
-use core::time::Duration;
+
+use core::{panic, time::Duration};
 use mousefood::prelude::*;
-use nx::diag::abort;
-use nx::gpu;
-use nx::result::*;
-use nx::svc;
-use nx::sync::RwLock;
-use nx::thread;
-use nx::util;
-use ratatui::widgets::{Block, Paragraph};
-use ratatui::{Frame, Terminal};
+use nx::{diag::abort, gpu, result::*, svc, sync::RwLock, thread, util};
+use ratatui::{
+    Frame, Terminal,
+    widgets::{Block, Paragraph},
+};
 
 // neccessary?
 nx::rrt0_define_module_name!(env!("CARGO_PKG_NAME"));

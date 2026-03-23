@@ -2,29 +2,26 @@
 #![no_main]
 
 extern crate alloc;
-use alloc::string::{String, ToString};
-use alloc::sync::Arc;
-use alloc::{format, vec};
-use core::panic;
-use core::time::Duration;
+use alloc::{format, sync::Arc, vec};
+
+use core::{panic, time::Duration};
 use mousefood::prelude::*;
-use nx::applet::{self, ISelfControllerClient, ProxyCommon, ScreenShotPermission, SelfController};
-use nx::diag::abort;
-use nx::ipc::client::IClientObject;
-use nx::service::bsd::AppletBsdService;
-use nx::service::hid;
-use nx::service::psm::{IPsmClient, PsmService};
-use nx::svc;
-use nx::sync::RwLock;
-use nx::thread::sleep;
-use nx::util;
-use nx::{gpu, input};
-use nx::{result::*, service};
-use ratatui::style::Style;
+use nx::{
+    diag::abort,
+    gpu, input,
+    result::*,
+    service::{
+        self, hid,
+        psm::{IPsmClient, PsmService},
+    },
+    svc,
+    sync::RwLock,
+    thread::sleep,
+    util,
+};
+use ratatui::prelude::*;
 use ratatui::widgets::{Block, Paragraph};
 use tui_big_text::{BigText, PixelSize};
-
-use ratatui::prelude::*;
 
 // neccessary?
 nx::rrt0_define_module_name!(env!("CARGO_PKG_NAME"));
