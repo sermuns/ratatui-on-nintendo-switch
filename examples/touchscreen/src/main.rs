@@ -2,32 +2,16 @@
 #![no_main]
 
 extern crate alloc;
-use alloc::{
-    format,
-    sync::Arc,
-    vec::{self, Vec},
-};
+use alloc::{format, sync::Arc};
 
 use core::{panic, time::Duration};
 use mousefood::prelude::*;
 use nx::{
-    diag::abort,
-    gpu, input,
-    result::*,
-    service::{
-        self, hid,
-        psm::{IPsmClient, PsmService},
-    },
-    svc,
-    sync::RwLock,
-    thread::sleep,
+    diag::abort, gpu, input, result::ResultBase, service::hid, svc, sync::RwLock, thread::sleep,
     util,
 };
-use ratatui::{
-    layout::Rows,
-    widgets::{Block, Cell, Padding, Paragraph, Row, Table},
-};
-use ratatui::{prelude::*, widgets::Gauge};
+use ratatui::prelude::*;
+use ratatui::widgets::{Block, Cell, Padding, Row, Table};
 
 // neccessary?
 nx::rrt0_define_module_name!(env!("CARGO_PKG_NAME"));
@@ -50,13 +34,6 @@ pub fn initialize_heap(hbl_heap: util::PointerAndSize) -> util::PointerAndSize {
 
 #[unsafe(no_mangle)]
 fn main() {
-    // // enable screenshotting??
-    // if let Some(applet_proxy) = applet::get_applet_proxy().as_ref()
-    //     && let Ok(self_controller) = applet_proxy.get_self_controller()
-    // {
-    //     let _ = self_controller.set_screenshot_permission(ScreenShotPermission::Enable);
-    // }
-
     let mut canvas = {
         let gpu_ctx = gpu::Context::new(
             gpu::NvDrvServiceKind::Applet,
@@ -123,24 +100,6 @@ impl<'a> App<'a> {
     }
 
     fn render(&self, frame: &mut Frame) {
-        // let layout = Layout::vertical([Constraint::Fill(1), Constraint::Fill(1)]);
-        // let [top_area, bottom_area] = frame.area().layout(&layout);
-
-        // let lines: Vec<_> = self
-        //     .input_ctx
-        //     .get_touch_state()
-        //     .touches
-        //     .iter()
-        //     .map(|touch| {
-        //         format!(
-        //             "x: {} | y: {} | diameter_x: {} | diameter_y: {} | rotation_angle: {}",
-        //             touch.x, touch.y, touch.diameter_x, touch.diameter_y, touch.rotation_angle as i16
-        //         )
-        //         .into()
-        //     })
-        //     .collect();
-        // let dbg_paragraph = Paragraph::new(lines);
-
         let rows = self.input_ctx.get_touch_state().touches.map(|touch| {
             Row::new([
                 Cell::new(format!("x: {}", touch.x)),

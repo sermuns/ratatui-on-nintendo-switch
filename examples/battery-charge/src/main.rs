@@ -44,13 +44,6 @@ pub fn initialize_heap(hbl_heap: util::PointerAndSize) -> util::PointerAndSize {
 
 #[unsafe(no_mangle)]
 fn main() {
-    // // enable screenshotting??
-    // if let Some(applet_proxy) = applet::get_applet_proxy().as_ref()
-    //     && let Ok(self_controller) = applet_proxy.get_self_controller()
-    // {
-    //     let _ = self_controller.set_screenshot_permission(ScreenShotPermission::Enable);
-    // }
-
     let mut canvas = {
         let gpu_ctx = gpu::Context::new(
             gpu::NvDrvServiceKind::Applet,
