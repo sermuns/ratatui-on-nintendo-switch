@@ -1,5 +1,5 @@
 [no-cd]
-upload:
+upload link_args="":
 	#!/bin/bash
 	set -e
 
@@ -12,4 +12,4 @@ upload:
 	PKG_NAME=$(basename "$PWD")
 
 	cargo nx build --release --package $PKG_NAME
-	cargo nx link "$TARGET_DIR/aarch64-nintendo-switch-freestanding/release/$PKG_NAME.nro"
+	cargo nx link "$TARGET_DIR/aarch64-nintendo-switch-freestanding/release/$PKG_NAME.nro" {{ link_args }}
