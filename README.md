@@ -2,7 +2,9 @@
 
 Standing on the shoulders of giants, I was able to cobble together a working example of Ratatui running on the Nintendo Switch.
 
-![](media/demo.jpg)
+![](media/hello-world.jpg)
+![](media/battery-charge.jpg)
+![](media/battery-charge-with-overlay.jpg)
 
 It relies on [Mousefood](https://github.com/ratatui/mousefood) and [nx](https://github.com/aarch64-switch-rs/nx) (though I've had to fork and update the `embedded-graphics-core` version).
 
