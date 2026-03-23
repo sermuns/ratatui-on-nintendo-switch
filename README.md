@@ -17,7 +17,7 @@ Then use [`cargo-nx`](https://github.com/aarch64-switch-rs/cargo-nx) to build an
 1. Build (you MUST do a `release` build. `debug` is simply too unoptimized):
 
    ```sh
-   cargo nx build --release
+   cargo nx build --release --package <EXAMPLE NAME>
    ```
 
 2. Start some form of `nxlink` receiver on the Nintendo Switch. My homebrew menu of choice [CyberLink](https://github.com/luketanti/CyberFoil) already has one running in the background.
