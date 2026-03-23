@@ -4,6 +4,7 @@ members = [
     "examples/hello-world",
     "examples/input",
     "examples/battery-charge",
+    "examples/touchscreen",
 ]
 
 [workspace.package]

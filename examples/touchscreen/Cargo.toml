@@ -1,0 +1,14 @@
+[package]
+name = "touchscreen"
+edition.workspace = true
+
+[dependencies]
+embedded-graphics-unicodefonts.workspace = true
+mousefood.workspace = true
+nx = { workspace = true, features = ["vty", "input", "applet"] }
+ratatui.workspace = true
+
+[package.metadata.nx.nro.nacp]
+name = "touchscreen"
+author = "sermuns"
+version = "0.1.0"
