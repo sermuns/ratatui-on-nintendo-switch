@@ -1,0 +1,16 @@
+[package]
+name = "ratatui-and-mousefood-logos"
+edition.workspace = true
+
+[dependencies]
+embedded-graphics-unicodefonts.workspace = true
+mousefood-logo-widget.git = "https://github.com/sermuns/mousefood-logo-widget"
+mousefood.workspace = true
+nx = { workspace = true, features = ["vty", "input", "applet"] }
+ratatui.workspace = true
+tui-big-text = "0.8"
+
+[package.metadata.nx.nro.nacp]
+name = "ratatui-and-mousefood-logos"
+author = "sermuns"
+version = "0.1.0"

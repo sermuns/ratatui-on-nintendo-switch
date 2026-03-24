@@ -5,6 +5,7 @@ members = [
     "examples/input",
     "examples/battery-charge",
     "examples/touchscreen",
+    "examples/ratatui-and-mousefood-logos",
 ]
 
 [workspace.package]

@@ -554,6 +554,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "mousefood-logo-widget"
+version = "0.1.0"
+source = "git+https://github.com/sermuns/mousefood-logo-widget#85a92834f46c855c21613379890504ee222c4db7"
+dependencies = [
+ "indoc",
+ "itertools",
+ "ratatui-core",
+]
+
+[[package]]
 name = "num-conv"
 version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -660,6 +670,18 @@ dependencies = [
  "instability",
  "ratatui-core",
  "ratatui-widgets",
+]
+
+[[package]]
+name = "ratatui-and-mousefood-logos"
+version = "0.0.0"
+dependencies = [
+ "embedded-graphics-unicodefonts",
+ "mousefood",
+ "mousefood-logo-widget",
+ "nx",
+ "ratatui",
+ "tui-big-text",
 ]
 
 [[package]]
