@@ -1,12 +1,6 @@
 [workspace]
 resolver = "3"
-members = [
-    "examples/hello-world",
-    "examples/input",
-    "examples/battery-charge",
-    "examples/touchscreen",
-    "examples/ratatui-and-mousefood-logos",
-]
+members = [ "examples/*" ]
 
 [workspace.package]
 edition = "2024"
