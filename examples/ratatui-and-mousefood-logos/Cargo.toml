@@ -4,7 +4,7 @@ edition.workspace = true
 
 [dependencies]
 embedded-graphics-unicodefonts.workspace = true
-mousefood-logo-widget.git = "https://github.com/sermuns/mousefood-logo-widget"
+mousefood-extras = { git = "https://github.com/sermuns/mousefood", branch = "mousefood-extras" }
 mousefood.workspace = true
 nx = { workspace = true, features = ["vty", "input", "applet"] }
 ratatui.workspace = true

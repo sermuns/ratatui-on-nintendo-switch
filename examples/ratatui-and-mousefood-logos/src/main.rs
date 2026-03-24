@@ -5,7 +5,7 @@ extern crate alloc;
 use alloc::sync::Arc;
 use core::{panic, time::Duration};
 use mousefood::prelude::*;
-use mousefood_logo_widget::MouseFoodLogo;
+use mousefood_extras::MouseFoodLogo;
 use nx::{
     diag::abort, gpu, input, result::ResultBase, service::hid, svc, sync::RwLock, thread::sleep,
     util,

@@ -554,9 +554,9 @@ dependencies = [
 ]
 
 [[package]]
-name = "mousefood-logo-widget"
+name = "mousefood-extras"
 version = "0.1.0"
-source = "git+https://github.com/sermuns/mousefood-logo-widget#85a92834f46c855c21613379890504ee222c4db7"
+source = "git+https://github.com/sermuns/mousefood?branch=mousefood-extras#893d8937f299310615cd14eb445adf41f0c0c82d"
 dependencies = [
  "indoc",
  "itertools",
@@ -678,7 +678,7 @@ version = "0.0.0"
 dependencies = [
  "embedded-graphics-unicodefonts",
  "mousefood",
- "mousefood-logo-widget",
+ "mousefood-extras",
  "nx",
  "ratatui",
  "tui-big-text",
