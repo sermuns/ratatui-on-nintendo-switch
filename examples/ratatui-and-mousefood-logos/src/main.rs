@@ -3,11 +3,11 @@
 
 extern crate alloc;
 use alloc::sync::Arc;
-use core::{panic, time::Duration};
+use core::{panic};
 use mousefood::prelude::*;
 use mousefood_extras::MouseFoodLogo;
 use nx::{
-    diag::abort, gpu, input, result::ResultBase, service::hid, svc, sync::RwLock, thread::sleep,
+    diag::abort, gpu, input, result::ResultBase, service::hid, svc, sync::RwLock,
     util,
 };
 use ratatui::layout::Flex;
