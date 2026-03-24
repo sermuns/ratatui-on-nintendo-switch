@@ -22,7 +22,7 @@ Then use [`cargo-nx`](https://github.com/aarch64-switch-rs/cargo-nx) to build an
    cargo nx build --release --package <EXAMPLE NAME>
    ```
 
-2. Start some form of `nxlink` receiver on the Nintendo Switch. My homebrew menu of choice [CyberLink](https://github.com/luketanti/CyberFoil) already has one running in the background.
+2. Start some form of `nxlink` receiver on the Nintendo Switch. My homebrew menu of choice [Sphaira](https://github.com/ITotalJustice/sphaira) already has one running in the background.
 
 3. Upload (Switch must be in same local network):
    ```sh
